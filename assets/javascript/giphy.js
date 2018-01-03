@@ -5,10 +5,7 @@
 // });
 
 var topics=["tigers","sugar gliders", "otters", "chinchillas", "dragons"];
-var topic2="camels";
 
-var queryURL= "http://api.giphy.com/v1/gifs/search?q=" + topic2 + "&api_key=dc6zaTOxFJmzC";
-console.log(queryURL);
 
 function createButtons(){
 	$('.buttons').empty();
@@ -30,15 +27,28 @@ $('.buttons').on('click', 'button', function(){
 	var buttonText = $(this).attr('data-name');
 	console.log(buttonText);
 
-});
+	var queryURL= "http://api.giphy.com/v1/gifs/search?q=" + buttonText + "&limit=10&api_key=dc6zaTOxFJmzC";
 
-
-$.ajax({
+	$.ajax({
 		url: queryURL,
 		method: "GET"
 	}).done(function(response){
 		console.log(response);
+
+		for (var i=0; i < response.data.length; i++){
+			console.log(response.data[i].title);
+			$('.coolGifs').append("<img src='" + response.data[i].images.fixed_height_small.url + "'/>");
+		};
+
+
+		//$('.coolGifs')
 	});
+
+
+
+});
+
+
 
 
 
