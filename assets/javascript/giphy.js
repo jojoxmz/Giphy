@@ -33,6 +33,7 @@ $(".buttons").on("click", "button", function() {
 	}).done(function(response) {
 		console.log(response);
 		for (var i = 0; i < response.data.length; i++) {
+
 			// HEY GUYS! See below for the stuff of interest!
 			// The code below does the same thing that the messy code 
 			// block we had before does... but it's a lot cleaner
@@ -41,6 +42,9 @@ $(".buttons").on("click", "button", function() {
 
 			// first, each time we loop through, we're creating a new img tag
 			var newImg = $("<img class='giphy' />");
+        	var rating= response.data[i].rating;
+        	var p= $('<p>').text("Ratings: " + rating);
+
 			// then, with each chained '.attr', we add the different data
 			// attributes as well as the img src attribute
 			newImg.attr("data-state", "still")
@@ -48,7 +52,9 @@ $(".buttons").on("click", "button", function() {
 				.attr("data-anim", response.data[i].images.fixed_height_small.url)
 				.attr("src", response.data[i].images.fixed_height_small_still.url)
 			// then, the last thing we do is we append the newImg to the coolGifs container
-			$(".coolGifs").append(newImg);
+			
+			$(".coolGifs").append(newImg).prepend(p);
+
 		}
 	});
 
@@ -56,14 +62,19 @@ $(".buttons").on("click", "button", function() {
 
 $(".coolGifs").on("click", ".giphy", function() {
 	// clear the coolGifs container first!!!
+	// $('.giphy').empty();
+
 	var gifState = $(this).attr("data-state");
 	var animUrl = $(this).attr("data-anim");
 	var stillUrl = $(this).attr("data-still");
 
 	if (gifState == "still") {
-		$(this).attr("src", animUrl); // this sets the src attribute to the animated url
+		$(this).attr("src", animUrl).attr('data-state', 'animate');
+		 // this sets the src attribute to the animated url
 		// set 'data-state' to be equal to 'anim'
+
 	} else {
+		$(this).attr("src", stillUrl).attr('data-state', 'still');
 		// set src to be equal to value to data-still
 		// set 'data-state' to be equal to still
 	}
