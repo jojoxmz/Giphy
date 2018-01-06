@@ -14,16 +14,18 @@ function createButtons(){
 	}
 };
 
-// function createNewButton(){
-// 	var newButtonText= $('#button-to-add').val();
-// 	topics.push("new bu");
-// 	createNewButton();
-// }
-
 createButtons();
 
+function createNewButton(){
+	var newButtonText= $('#searchInput').val();
+	console.log(newButtonText);
+	topics.push(newButtonText);
+	createButtons()
+	};
 
-$(".buttons").on("click", "button", function() {
+$(".buttons").on("click", "button", function(e) {
+	e.preventDefault();
+	$('.coolGifs').empty();
 	var buttonText = $(this).attr("data-name");
 	var queryUrl = "http://api.giphy.com/v1/gifs/search?q=" + buttonText + "&limit=10&api_key=dc6zaTOxFJmzC";
 
@@ -41,8 +43,8 @@ $(".buttons").on("click", "button", function() {
 			// any questions on the what/why/how of it!
 
 			// first, each time we loop through, we're creating a new img tag
+			var newDiv= $("<div />").addClass("divContainer");
 			var newImg = $("<img class='giphy' />");
-					newImg.css({float: 'left'});
         	var rating= response.data[i].rating;
         	var p= $('<p>').text("Ratings: " + rating);
 
@@ -52,19 +54,23 @@ $(".buttons").on("click", "button", function() {
 				.attr("data-still", response.data[i].images.fixed_height_small_still.url)
 				.attr("data-anim", response.data[i].images.fixed_height_small.url)
 				.attr("src", response.data[i].images.fixed_height_small_still.url)
+				// .attr("align", "left");
 				// .attr("ratings", response.data[i].rating)
 			// then, the last thing we do is we append the newImg to the coolGifs container
-			
-			$(".coolGifs").append(newImg).append(p);
+			newDiv.append(newImg).append(p);
+
+			$(".coolGifs").append(newDiv);
+
 
 		}
 	});
 
 });
 
-$(".coolGifs").on("click", ".giphy", function() {
+$(".coolGifs").on("click", ".giphy", function(e) {
 	// clear the coolGifs container first!!!
-	// $('.giphy').empty();
+	
+	e.preventDefault();
 
 	var gifState = $(this).attr("data-state");
 	var animUrl = $(this).attr("data-anim");
@@ -85,7 +91,11 @@ $(".coolGifs").on("click", ".giphy", function() {
 
 // Add a click event for the submit button in the 'add animal' section
 // This click event should call the 'createNewButton' function
-$(".")
+$("#submitButton").on("click", function(e){
+	e.preventDefault();
+	console.log("hey");
+	createNewButton();
+});
 
 
 // this is calling it initially --- you'll be calling it again 
