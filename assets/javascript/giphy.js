@@ -42,6 +42,7 @@ $(".buttons").on("click", "button", function() {
 
 			// first, each time we loop through, we're creating a new img tag
 			var newImg = $("<img class='giphy' />");
+					newImg.css({float: 'left'});
         	var rating= response.data[i].rating;
         	var p= $('<p>').text("Ratings: " + rating);
 
@@ -51,9 +52,10 @@ $(".buttons").on("click", "button", function() {
 				.attr("data-still", response.data[i].images.fixed_height_small_still.url)
 				.attr("data-anim", response.data[i].images.fixed_height_small.url)
 				.attr("src", response.data[i].images.fixed_height_small_still.url)
+				// .attr("ratings", response.data[i].rating)
 			// then, the last thing we do is we append the newImg to the coolGifs container
 			
-			$(".coolGifs").append(newImg).prepend(p);
+			$(".coolGifs").append(newImg).append(p);
 
 		}
 	});
@@ -83,6 +85,8 @@ $(".coolGifs").on("click", ".giphy", function() {
 
 // Add a click event for the submit button in the 'add animal' section
 // This click event should call the 'createNewButton' function
+$(".")
+
 
 // this is calling it initially --- you'll be calling it again 
 // each time a new button is created
