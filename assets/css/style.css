@@ -1,3 +1,21 @@
 body{
 	background: pink;
+	width: 100%;
+}
+
+.container{
+	width: 100%;
+}
+
+.gifsContainer{
+	width: 60%;
+}
+
+form{
+	float: right;
+}
+
+h1{
+	text-align: center;
+	margin: 0 auto;
 }
