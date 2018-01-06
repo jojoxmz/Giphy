@@ -1,21 +1,30 @@
 body{
 	background: pink;
 	width: 100%;
+	text-align: center;
+		margin: 0 auto;
+
 }
 
 .container{
 	width: 100%;
 }
 
-.gifsContainer{
-	width: 60%;
-}
-
 form{
-	float: right;
-}
-
-h1{
+	width: 500px;
 	text-align: center;
 	margin: 0 auto;
+	padding: 30px;
+}
+
+#searchContainer{
+	width: 100%;
+}
+
+.buttons{
+	padding: 30px;
+}
+
+#logo{
+	padding: 40px;
 }
